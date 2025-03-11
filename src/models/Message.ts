@@ -1,10 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
-
-export interface IMessage extends Document {
-  user: string;
-  text: string;
-  timestamp: Date;
-}
+import { IMessage } from '../types/message';
 
 const messageSchema = new Schema({
   user: { type: String, required: true },

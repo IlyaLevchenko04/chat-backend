@@ -1,5 +1,5 @@
 import { Server } from 'socket.io';
-import { createMessage, getMessages } from '../services/MessageService';
+import { createMessage, getMessages } from '../services/messageService';
 
 export const setupSocket = (io: Server) => {
   io.on('connection', async socket => {
@@ -8,8 +8,7 @@ export const setupSocket = (io: Server) => {
     const messages = await getMessages();
     socket.emit('initial_messages', messages);
 
-    socket.on('new_message', async message => {
-      const { user, text } = message;
+    socket.on('new_message', async ({ user, text }) => {
       const newMessage = await createMessage(user, text);
       io.emit('new_message', newMessage);
     });
